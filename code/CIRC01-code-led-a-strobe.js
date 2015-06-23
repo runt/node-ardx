@@ -14,7 +14,8 @@ var myBoard, myLed;
 var options = {
     port: new SerialPort(
             "/dev/pts/12", {
-            baudrate: 57600
+            baudrate: 57600,
+	    debug: true
     })
 };
 
