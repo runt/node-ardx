@@ -2,13 +2,13 @@ var five = require("johnny-five");
 var SerialPort = require("serialport").SerialPort;
 var serialPort = require("serialport");
 
-serialPort.list(function (err, ports) {
-  ports.forEach(function(port) {
-    console.log(port.comName);
-    console.log(port.pnpId);
-    console.log(port.manufacturer);
-  });
-});
+//serialPort.list(function (err, ports) {
+//  ports.forEach(function(port) {
+//    console.log(port.comName);
+//    console.log(port.pnpId);
+//    console.log(port.manufacturer);
+//  });
+//});
 
 var myBoard, myLed;
 var options = {
@@ -19,6 +19,7 @@ var options = {
 };
 
 myBoard = new five.Board(options);
+//myBoard = new five.Board();
 
 myBoard.on("ready", function() {
 

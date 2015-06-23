@@ -5,10 +5,36 @@
  */
 
 
-var SerialPort = require("serialport").SerialPort
+var SerialPort = require("serialport").SerialPort;
+var sep = require("serialport");
 var serialPort = new SerialPort("/dev/ttyUSB0", {
   baudrate: 19200
+},false);
+
+console.log(sep);
+
+sep.list(function(err,ports){
+    if(err){
+	console('error on list: '+err);
+    }
+    else{
+	console.log('will list ser. ports:');
+	ports.forEach(function(port){
+	    console.log(port.comName);
+	});
+    }
 });
+
+
+serialPort.open(function(error){
+    if(error){
+	console.log('failed to open : '+error);
+    }
+    else{
+	console.log('opened');
+    }
+});
+
 
 serialPort.on("open", function () {
   console.log('opened');
