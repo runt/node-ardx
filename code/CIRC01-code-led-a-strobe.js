@@ -13,17 +13,22 @@ var serialPort = require("serialport");
 var myBoard, myLed;
 var options = {
     port: new SerialPort(
-            "/dev/ttyUSB0", {
+            "/dev/pts/12", {
             baudrate: 57600
     })
 };
 
+console.log(options);
+
 myBoard = new five.Board(options);
+
+console.log(myBoard);
+
 //myBoard = new five.Board();
 
-myBoard.on("ready", function() {
+//myBoard.on("ready", function() {
 
-console.log('ready');
+//console.log('ready');
 //  myLed = new five.Led(13)
 //
 //  myLed.strobe( 1000 );
@@ -36,4 +41,4 @@ console.log('ready');
 //    led: myLed
 //  });
   //console.log("You can interact with the RGB LED via the variable 'led' e.g. led.on();\n Hit control-D to exit.\n >> ");
-});
+//});

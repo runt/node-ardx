@@ -4,11 +4,16 @@
  * and open the template in the editor.
  */
 
+// vytvoreni paru virtualnich portu
+// socat -d -d pty,raw,echo=0 pty,raw,echo=0
+
+
+
 
 var SerialPort = require("serialport").SerialPort;
 var sep = require("serialport");
-var serialPort = new SerialPort("/dev/ttyUSB0", {
-  baudrate: 19200
+var serialPort = new SerialPort("/dev/pts/12", {
+  baudrate: 57600
 },false);
 
 console.log(sep);
@@ -37,12 +42,13 @@ serialPort.open(function(error){
 
 
 serialPort.on("open", function () {
-  console.log('opened');
+  console.log('udalost open');
   serialPort.on('data', function(data) {
-    console.log('data received: ' + data);
-  });
-  serialPort.write("ls\n", function(err, results) {
-    console.log('err ' + err);
-    console.log('results ' + results);
+    console.log('data received: ' + data+'data code='+data.toString().charCodeAt(0));
+    //poslat zpet do portu jako echo
+    if(data.toString().charCodeAt(0)==13) data="\r\nnovy radek\r\n";
+    serialPort.write(data,function(err,result){
+	console.log('result z echovani'+result);
+    });
   });
 });
